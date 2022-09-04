@@ -1,0 +1,12 @@
+<h2>Search Systems</h2>
+<form action="/systems" method="GET">
+    <label>Name</label>
+    <input type="text" name="name">
+    <button type="submit">Search</button>
+</form>
+<br>
+<% systems.forEach(system=>{ %>
+    <div>
+        <%= system.name%>
+    </div>
+    <% })%>
