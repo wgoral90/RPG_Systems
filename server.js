@@ -1,6 +1,6 @@
-if (process.env.NODE_ENV !== "production") {
-    require('dotenv').load()
-}
+// if (process.env.NODE_ENV !== "production") {
+//     require('dotenv').load()
+// }
 
 const express = require("express")
 const app = express()
@@ -10,13 +10,16 @@ const PORT = 4000
 
 const morgan = require('morgan')
 
-// const Pool = require("pg").Pool
-// const pool = new Pool({
-//     connectionString: process.env.DATABASE_URL,
-//     ssl: {
-//         rejectUnauthorized: false
-//     }
-// });
+const { Client } = require('pg');
+
+const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
+});
+
+client.connect();
 
 const indexRouter = require("./routes/index")
 const systemsRouter = require("./routes/systems")
