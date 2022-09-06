@@ -18,6 +18,11 @@ module.exports = (sequelize, DataTypes) => {
             }
         }
     })
+    System.associate = function (models) {
+        System.hasMany(models.Edition, { as: "edition" })
+    };
+
     return System
 }
+
 

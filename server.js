@@ -10,19 +10,11 @@ const PORT = 4000
 
 const morgan = require('morgan')
 
-const { Client } = require('pg');
 
-const client = new Client({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false
-    }
-});
-
-client.connect();
 
 const indexRouter = require("./routes/index")
 const systemsRouter = require("./routes/systems")
+const editionsRouter = require("./routes/editions")
 const bodyParser = require("body-parser")
 
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: false }))
@@ -34,6 +26,7 @@ app.use(expressLayouts)
 app.use(express.static("public"))
 app.use("/", indexRouter)
 app.use("/systems", systemsRouter)
+app.use("/editions", editionsRouter)
 
 db.sequelize.sync().then((req => {
     app.listen(PORT, () => {

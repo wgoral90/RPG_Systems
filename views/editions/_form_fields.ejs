@@ -1,0 +1,28 @@
+<div>
+    <label>Title</label>
+    <input type="text" name="title" value="<%= edition.title %>">
+</div>
+<div>
+    <label>System</label>
+    <select name="system">
+        <% systems.forEach(system=> { %>
+            <% if (system.id===edition.systemId) { %>
+                <option selected label="<%= system.name %>" value="<%= system.id %>">
+                    <% } else { %>
+                <option label="<%= system.name %>" value="<%= system.id %>">
+                    <% } %>
+                        <% }) %>
+    </select>
+</div>
+<div>
+    <label>Version</label>
+    <input type="number" name="version" value="<%= edition.version %>">
+</div>
+<div>
+    <label>Description</label>
+    <textarea name="description" value="<%= edition.description %>"><%= edition.description %> </textarea>
+</div>
+<div>
+    <label>Image</label>
+    <input type="file" name="image">
+</div>
