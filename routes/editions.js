@@ -5,7 +5,8 @@ const { Edition } = require("../models")
 const { System } = require("../models")
 const Sequelize = require('sequelize');
 const path = require("path")
-const uploadPath = path.join("public", "uploads/bookCovers")
+const coverImageBasePath = "uploads/bookCovers"
+const uploadPath = path.join("public", Edition.coverImageBasePath)
 const imageMimeTypes = ["images/jpeg", "images/png", "images/gif"]
 const Op = Sequelize.Op;
 const multer = require("multer")
@@ -36,12 +37,14 @@ router.post("/", upload.single("image"), async (req, res) => {
         system: req.body.system,
         version: req.body.version,
         description: req.body.description,
-        coverImageName: fileName
+        coverImageName: fileName,
+        systemId: req.body.system
     }
+
     try {
         await Edition.create({
             title: edition.title,
-            system: edition.system,
+            SystemId: edition.system,
             version: edition.version,
             description: edition.descrpition,
             coverImageName: fileName

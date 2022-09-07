@@ -6,7 +6,7 @@
     <label>System</label>
     <select name="system">
         <% systems.forEach(system=> { %>
-            <% if (system.id===edition.systemId) { %>
+            <% if (system.id===edition.SystemId) { %>
                 <option selected label="<%= system.name %>" value="<%= system.id %>">
                     <% } else { %>
                 <option label="<%= system.name %>" value="<%= system.id %>">
