@@ -1,4 +1,5 @@
-const coverImagePathFolder = "uploads/bookCovers"
+const path = require("path")
+const uploadPath = "public/uploads/bookCovers"
 module.exports = (sequelize, DataTypes) => {
     const Edition = sequelize.define("Edition", {
 
@@ -50,7 +51,13 @@ module.exports = (sequelize, DataTypes) => {
                 key: "id"
             }
 
+        }, coverImagePath: {
+            type: DataTypes.VIRTUAL,
+            get() {
+                return path.join("/", uploadPath, this.coverImageName)
+            }
         }
+
 
     })
     Edition.associate = function (models) {

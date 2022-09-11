@@ -1,0 +1,24 @@
+<h2>Search Editions</h2>
+<form action="/editions" method="GET">
+    <div>
+        <label>Title</label>
+        <input type="text" name="title">
+    </div>
+    <div>
+        <label>System</label>
+        <input type="text" name="system">
+    </div>
+    <div>
+        <label>Edition</label>
+        <input type="number" name="version">
+    </div>
+    <button type="submit">Search</button>
+</form>
+<br>
+<div>
+    <% editions.forEach(edition=>{ %>
+
+        <img height="150" width="100" src="<%= edition.coverImagePath%>">
+
+        <% })%>
+</div>

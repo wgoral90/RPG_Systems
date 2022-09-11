@@ -1,8 +1,16 @@
 const express = require("express")
 const router = express.Router()
+const { Edition } = require("../models")
 
-router.get("/", (req, res) => {
-    res.render("index")
+router.get("/", async (req, res) => {
+    let editions
+    try {
+        editions = await Edition.findAll()
+    } catch (err) {
+        console.log(err)
+        editions = []
+    }
+    res.render("index", { editions: editions })
 })
 
 // router.get('/db', async (req, res) => {
