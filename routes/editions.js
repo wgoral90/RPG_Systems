@@ -11,24 +11,24 @@ const uploadPath = path.join("public", coverImageBasePath)
 const imageMimeTypes = ["image/jpeg", "image/jpg", "image/png", "image/gif"]
 const Op = Sequelize.Op;
 const multer = require("multer")
-// let storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//         cb(null, "./public/uploads/editionCovers")
-//     },
-//     filename: function (req, file, cb) {
-//         cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname))
+// const upload = multer({
+//     dest: uploadPath,
+//     fileFilter: (req, file, callback) => {
+//         callback(null, imageMimeTypes.includes(file.mimetype))
 //     }
-// })
-// const upload = multer({ storage: storage }).single("image")
-const upload = multer({
-    dest: uploadPath,
-    fileFilter: (req, file, callback) => {
-        callback(null, imageMimeTypes.includes(file.mimetype))
-    }
 
+// })
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, uploadPath)
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + path.extname(file.originalname)) //Appending .jpg
+    }
 })
 
-
+var upload = multer({ storage: storage });
 
 
 //All Edition Routes
@@ -70,14 +70,12 @@ router.get("/new", async (req, res) => {
 router.post("/", upload.single("image"), async (req, res) => {
     const fileName = req.file != null ? req.file.file : null
     const fileExtension = path.extname(req.file.originalname)
-    console.log(`original name ${req.file.originalname}`)
-    console.log(`file ext ${fileExtension}`)
     const edition = {
         title: req.body.title,
         system: req.body.system,
         version: req.body.version,
         description: req.body.description,
-        coverImageName: `${req.file.filename}${fileExtension}`,
+        coverImageName: req.file.filename,
         systemId: req.body.system
     }
     try {

@@ -1,28 +1,36 @@
-<div>
-    <label>Title</label>
-    <input type="text" name="title" value="<%= edition.title %>">
+<div class="form-row">
+    <div class="form-item">
+        <label>Title</label>
+        <input type="text" name="title" value="<%= edition.title %>">
+    </div>
+
+    <div class="form-item">
+        <label>System</label>
+        <select name="system">
+            <% systems.forEach(system=> { %>
+                <% if (system.id===edition.SystemId) { %>
+                    <option selected label="<%= system.name %>" value="<%= system.id %>">
+                        <% } else { %>
+                    <option label="<%= system.name %>" value="<%= system.id %>">
+                        <% } %>
+                            <% }) %>
+        </select>
+    </div>
+    <div class="form-item ">
+        <label>Version</label>
+        <input type="number" name="version" value="<%= edition.version %>">
+    </div>
 </div>
-<div>
-    <label>System</label>
-    <select name="system">
-        <% systems.forEach(system=> { %>
-            <% if (system.id===edition.SystemId) { %>
-                <option selected label="<%= system.name %>" value="<%= system.id %>">
-                    <% } else { %>
-                <option label="<%= system.name %>" value="<%= system.id %>">
-                    <% } %>
-                        <% }) %>
-    </select>
+<div class="form-row">
+    <div class="form-item">
+
+        <label>Description</label>
+        <textarea name="description" value="<%= edition.description %>"><%= edition.description %> </textarea>
+    </div>
 </div>
-<div>
-    <label>Version</label>
-    <input type="number" name="version" value="<%= edition.version %>">
-</div>
-<div>
-    <label>Description</label>
-    <textarea name="description" value="<%= edition.description %>"><%= edition.description %> </textarea>
-</div>
-<div>
-    <label>Image</label>
-    <input type="file" name="image">
+<div class="form-row">
+    <div class="form-item form-item-image">
+        <label>Image</label>
+        <input type="file" name="image">
+    </div>
 </div>
