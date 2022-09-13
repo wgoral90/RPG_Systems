@@ -39,19 +39,7 @@ router.post("/", async (req, res) => {
     const system = new System({
         name: req.body.name
     })
-    // system.save((err, newSystem) => {
-    //     if (err) {
-    //         console.log(err)
-    //         res.render("systems/new", {
-    //             system: system,
-    //             errorMessage: "Error creating System",
 
-    //         })
-    //     } else {
-    //         //res.redirect(`systems/${newSystem.id}`)
-    //         res.redirect("systems")
-    //     }
-    // })
     try {
         await System.create({
             name: system.name
